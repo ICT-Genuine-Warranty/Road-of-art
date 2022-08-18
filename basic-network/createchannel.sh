@@ -17,7 +17,7 @@ function subinfoln() {
 export PATH=${HOME}/fabric-samples/bin:$PATH
 export FABRIC_CFG_PATH=${PWD}/config
 
-CHANNEL_NAME="mychannel"
+CHANNEL_NAME="Road-of-art"
 
 
 # create channel
