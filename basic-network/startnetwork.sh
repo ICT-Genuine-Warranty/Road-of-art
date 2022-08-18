@@ -32,17 +32,38 @@ fi
 
 infoln "Generating certificates using cryptogen tool"
 
-subinfoln "Creating Org1 Identities"
+subinfoln "Creating Coupang Identities"
 
 set -x
-cryptogen generate --config=./config/crypto-config-org1.yaml --output="organizations"
+cryptogen generate --config=./config/crypto-config-coupang.yaml --output="organizations"
 res=$?
 { set +x; } 2>/dev/null
 
-subinfoln "Creating Org2 Identities"
+subinfoln "Creating Auction Identities"
 
 set -x
-cryptogen generate --config=./config/crypto-config-org2.yaml --output="organizations"
+cryptogen generate --config=./config/crypto-config-auction.yaml --output="organizations"
+res=$?
+{ set +x; } 2>/dev/null
+
+subinfoln "Creating Bunjang Identities"
+
+set -x
+cryptogen generate --config=./config/crypto-config-bunjang.yaml --output="organizations"
+res=$?
+{ set +x; } 2>/dev/null
+
+subinfoln "Creating Daangn Identities"
+
+set -x
+cryptogen generate --config=./config/crypto-config-daangn.yaml --output="organizations"
+res=$?
+{ set +x; } 2>/dev/null
+
+subinfoln "Creating Kream Identities"
+
+set -x
+cryptogen generate --config=./config/crypto-config-kream.yaml --output="organizations"
 res=$?
 { set +x; } 2>/dev/null
 
