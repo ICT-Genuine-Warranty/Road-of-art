@@ -44,15 +44,15 @@ Organizations:
         OrdererEndpoints:
             - orderer.example.com:7050
 
-    - &Org1
+    - &Coupang
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: Org1MSP
+        Name: CoupangMSP
 
         # ID to load the MSP definition as
-        ID: Org1MSP
+        ID: CoupangMSP
 
-        MSPDir: ../organizations/peerOrganizations/org1.example.com/msp
+        MSPDir: ../organizations/peerOrganizations/coupang.example.com/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -60,29 +60,29 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
+                Rule: "OR('CoupangMSP.admin', 'CoupangMSP.peer', 'CoupangMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
+                Rule: "OR('CoupangMSP.admin', 'CoupangMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin')"
+                Rule: "OR('CoupangMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('Org1MSP.peer')"
+                Rule: "OR('CoupangMSP.peer')"
         AnchorPeers:
-            - HOST: peer0.org1.example.com
+            - HOST: peer0.coupang.example.com
               PORT: 7051
 
-    - &Org2
+    - &Auction
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: Org2MSP
+        Name: AuctionMSP
 
         # ID to load the MSP definition as
-        ID: Org2MSP
+        ID: AuctionMSP
 
-        MSPDir: ../organizations/peerOrganizations/org2.example.com/msp
+        MSPDir: ../organizations/peerOrganizations/auction.example.com/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -90,19 +90,109 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"
+                Rule: "OR('AuctionMSP.admin', 'AuctionMSP.peer', 'AuctionMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"
+                Rule: "OR('AuctionMSP.admin', 'AuctionMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin')"
+                Rule: "OR('AuctionMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('Org2MSP.peer')"
+                Rule: "OR('AuctionMSP.peer')"
         AnchorPeers:
-            - HOST: peer0.org2.example.com
+            - HOST: peer0.auction.example.com
               PORT: 9051
+
+    - &Bunjang
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: BunjangMSP
+
+        # ID to load the MSP definition as
+        ID: BunjangMSP
+
+        MSPDir: ../organizations/peerOrganizations/bunjang.example.com/msp
+
+        # Policies defines the set of policies at this level of the config tree
+        # For organization policies, their canonical path is usually
+        #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('BunjangMSP.admin', 'BunjangMSP.peer', 'BunjangMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('BunjangMSP.admin', 'BunjangMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('BunjangMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('BunjangMSP.peer')"
+        AnchorPeers:
+            - HOST: peer0.bunjang.example.com
+              PORT: 11051
+
+    - &Daangn
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: DaangnMSP
+
+        # ID to load the MSP definition as
+        ID: DaangnMSP
+
+        MSPDir: ../organizations/peerOrganizations/daangn.example.com/msp
+
+        # Policies defines the set of policies at this level of the config tree
+        # For organization policies, their canonical path is usually
+        #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('DaangnMSP.admin', 'DaangnMSP.peer', 'DaangnMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('DaangnMSP.admin', 'DaangnMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('DaangnMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('DaangnMSP.peer')"
+        AnchorPeers:
+            - HOST: peer0.daangn.example.com
+              PORT: 13051              
+
+    - &Kream
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: KreamMSP
+
+        # ID to load the MSP definition as
+        ID: KreamMSP
+
+        MSPDir: ../organizations/peerOrganizations/kream.example.com/msp
+
+        # Policies defines the set of policies at this level of the config tree
+        # For organization policies, their canonical path is usually
+        #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('KreamMSP.admin', 'KreamMSP.peer', 'KreamMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('KreamMSP.admin', 'KreamMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('KreamMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('KreamMSP.peer')"
+        AnchorPeers:
+            - HOST: peer0.kream.example.com
+              PORT: 15051
 
 ################################################################################
 #
@@ -318,15 +408,21 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                    - *Org1
-                    - *Org2
+                    - *Coupang
+                    - *Auction
+                    - *Bunjang
+                    - *Daangn
+                    - *Kream
     TwoOrgsChannel:
         Consortium: SampleConsortium
         <<: *ChannelDefaults
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
-                - *Org2
+                - *Coupang
+                - *Auction
+                - *Bunjang
+                - *Daangn
+                - *Kream
             Capabilities:
                 <<: *ApplicationCapabilities
