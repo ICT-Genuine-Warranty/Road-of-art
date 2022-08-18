@@ -220,3 +220,30 @@ func (s *SmartContract) GetAllTradeInfos(ctx contractapi.TransactionContextInter
 
 	return assets, nil
 }
+
+func (s *SmartContract) GetHistory(ctx contractapi.TransactionContextInterface, itemCode string) ([]*TradeInfo, error) {
+	// range query with empty string for startKey and endKey does an
+	// open-ended query of all assets in the chaincode namespace.
+	resultsIterator, err := ctx.GetStub().GetHistoryForKey(itemCode)
+	if err != nil {
+		return nil, err
+	}
+	defer resultsIterator.Close()
+
+	var assets []*TradeInfo
+	for resultsIterator.HasNext() {
+		queryResponse, err := resultsIterator.Next()
+		if err != nil {
+			return nil, err
+		}
+
+		var asset TradeInfo
+		err = json.Unmarshal(queryResponse.Value, &asset)
+		if err != nil {
+			return nil, err
+		}
+		assets = append(assets, &asset)
+	}
+
+	return assets, nil
+}
