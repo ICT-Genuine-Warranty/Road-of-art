@@ -63,6 +63,48 @@ peer lifecycle chaincode install ${CC_NAME}.tar.gz >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt
 
+## Install chaincode on peer0.org3
+infoln "Installing chaincode on peer0.org3..."
+
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="Org3MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
+export CORE_PEER_ADDRESS=localhost:11051
+
+## Install chaincode on peer0.org4
+infoln "Installing chaincode on peer0.org4..."
+
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="Org4MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org4.example.com/peers/peer0.org4.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org4.example.com/users/Admin@org4.example.com/msp
+export CORE_PEER_ADDRESS=localhost:13051
+
+## Install chaincode on peer0.org5
+infoln "Installing chaincode on peer0.org5..."
+
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="Org5MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org5.example.com/peers/peer0.org5.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org5.example.com/users/Admin@org5.example.com/msp
+export CORE_PEER_ADDRESS=localhost:15051
+
+set -x
+peer lifecycle chaincode install ${CC_NAME}.tar.gz >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
+
+set -x
+peer lifecycle chaincode install ${CC_NAME}.tar.gz >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
+
+set -x
+peer lifecycle chaincode install ${CC_NAME}.tar.gz >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
+
 set -x
 peer lifecycle chaincode queryinstalled >&log.txt  
 { set +x; } 2>/dev/null
@@ -97,6 +139,54 @@ export CORE_PEER_LOCALMSPID="Org2MSP"
 export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
 export CORE_PEER_ADDRESS=localhost:9051
+
+set -x
+peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${CC_VERSION} --package-id ${PACKAGE_ID} --sequence 1 >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
+
+## approve the definition for org3
+infoln "approve the definition on peer0.org3..."
+
+ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="Org3MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
+export CORE_PEER_ADDRESS=localhost:11051
+
+## approve the definition for org4
+infoln "approve the definition on peer0.org4..."
+
+ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="Org4MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org4.example.com/peers/peer0.org4.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org4.example.com/users/Admin@org4.example.com/msp
+export CORE_PEER_ADDRESS=localhost:13051
+
+## approve the definition for org5
+infoln "approve the definition on peer0.org5..."
+
+ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="Org5MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org5.example.com/peers/peer0.org5.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org5.example.com/users/Admin@org5.example.com/msp
+export CORE_PEER_ADDRESS=localhost:15051
+
+set -x
+peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${CC_VERSION} --package-id ${PACKAGE_ID} --sequence 1 >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
+
+set -x
+peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${CC_VERSION} --package-id ${PACKAGE_ID} --sequence 1 >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
 
 set -x
 peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${CC_VERSION} --package-id ${PACKAGE_ID} --sequence 1 >&log.txt
