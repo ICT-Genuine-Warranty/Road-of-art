@@ -1,6 +1,7 @@
 #!/bin/bash
 
-COMPOSE_FILE_CA=docker/docker-compose-ca.yaml
+COMPOSE_FILES_ORDERER=docker/docker-compose-orderer.yaml
+# COMPOSE_FILE_CA=docker/docker-compose-ca.yaml
 COMPOSE_FILES=docker/docker-compose-net.yaml
 COMPOSE_FILES_COUCH=docker/docker-compose-couch.yaml
 
@@ -15,7 +16,7 @@ fi
 
 # cleen up the genesis block directory
 if [ -d "system-genesis-block" ]; then
-    rm -Rf system-genesis-block/*
+    sudo rm -Rf system-genesis-block/*
 fi
 
 # cleen up the genesis block directory
