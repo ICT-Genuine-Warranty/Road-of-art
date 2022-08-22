@@ -24,7 +24,7 @@ CC_NAME="basic"
 CC_SRC_PATH="../chaincode/asset-transfer-basic"
 CC_RUNTIME_LANGUAGE="golang"
 CC_VERSION="1"
-CHANNEL_NAME="mychannel"
+CHANNEL_NAME="roadofart"
 
 
 ## package the chaincode
