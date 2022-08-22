@@ -35,8 +35,10 @@ COMPOSE_FILE_CA=docker/docker-compose-ca.yaml
 IMAGE_TAG=latest docker-compose -f $COMPOSE_FILE_CA up -d 2>&1
 sleep 2
 
-# Create crypto material using cryptogen
+# Create crypto material using Fabric CA
+. scripts/registerEnroll.sh
 
+# Create crypto material using cryptogen
 infoln "Generating certificates using cryptogen tool"
 
 subinfoln "Creating Coupang Identities"
