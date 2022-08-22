@@ -32,17 +32,38 @@ fi
 
 infoln "Generating certificates using cryptogen tool"
 
-subinfoln "Creating Org1 Identities"
+subinfoln "Creating Coupang Identities"
 
 set -x
-cryptogen generate --config=./config/crypto-config-org1.yaml --output="organizations"
+cryptogen generate --config=./config/crypto-config-coupang.yaml --output="organizations"
 res=$?
 { set +x; } 2>/dev/null
 
-subinfoln "Creating Org2 Identities"
+subinfoln "Creating Auction Identities"
 
 set -x
-cryptogen generate --config=./config/crypto-config-org2.yaml --output="organizations"
+cryptogen generate --config=./config/crypto-config-auction.yaml --output="organizations"
+res=$?
+{ set +x; } 2>/dev/null
+
+subinfoln "Creating Bunjang Identities"
+
+set -x
+cryptogen generate --config=./config/crypto-config-bunjang.yaml --output="organizations"
+res=$?
+{ set +x; } 2>/dev/null
+
+subinfoln "Creating Daangn Identities"
+
+set -x
+cryptogen generate --config=./config/crypto-config-daangn.yaml --output="organizations"
+res=$?
+{ set +x; } 2>/dev/null
+
+subinfoln "Creating Kream Identities"
+
+set -x
+cryptogen generate --config=./config/crypto-config-kream.yaml --output="organizations"
 res=$?
 { set +x; } 2>/dev/null
 
@@ -63,9 +84,10 @@ configtxgen -profile TwoOrgsOrdererGenesis -channelID system-channel -outputBloc
 # Bring up the peer and orderer nodes using docker compose.
 infoln "------------- Bring up the peer and orderer nodes using docker compose"
 
-COMPOSE_FILES=docker/docker-compose-net.yaml
-# IMAGE_TAG=latest docker-compose -f $COMPOSE_FILES up -d 2>&1
+COMPOSE_FILES_ORDERER=docker/docker-compose-orderer.yaml
+COMPOSE_FILES_PEER=docker/docker-compose-peer.yaml
 COMPOSE_FILES_COUCH=docker/docker-compose-couch.yaml
-IMAGE_TAG=latest docker-compose -f $COMPOSE_FILES -f $COMPOSE_FILES_COUCH up -d 2>&1
+
+IMAGE_TAG=latest docker-compose -f $COMPOSE_FILES_ORDERER -f $COMPOSE_FILES_PEER -f $COMPOSE_FILES_COUCH up -d 2>&1
 
 docker ps -a
