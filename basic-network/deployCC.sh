@@ -72,6 +72,11 @@ export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/bunjan
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/bunjang.example.com/users/Admin@bunjang.example.com/msp
 export CORE_PEER_ADDRESS=localhost:11051
 
+set -x
+peer lifecycle chaincode install ${CC_NAME}.tar.gz >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
+
 ## Install chaincode on peer0.daangn
 infoln "Installing chaincode on peer0.daangn..."
 
@@ -81,6 +86,11 @@ export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/daangn
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/daangn.example.com/users/Admin@daangn.example.com/msp
 export CORE_PEER_ADDRESS=localhost:13051
 
+set -x
+peer lifecycle chaincode install ${CC_NAME}.tar.gz >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
+
 ## Install chaincode on peer0.kream
 infoln "Installing chaincode on peer0.kream..."
 
@@ -89,16 +99,6 @@ export CORE_PEER_LOCALMSPID="KreamMSP"
 export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/kream.example.com/peers/peer0.kream.example.com/tls/ca.crt
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/kream.example.com/users/Admin@kream.example.com/msp
 export CORE_PEER_ADDRESS=localhost:15051
-
-set -x
-peer lifecycle chaincode install ${CC_NAME}.tar.gz >&log.txt
-{ set +x; } 2>/dev/null
-cat log.txt
-
-set -x
-peer lifecycle chaincode install ${CC_NAME}.tar.gz >&log.txt
-{ set +x; } 2>/dev/null
-cat log.txt
 
 set -x
 peer lifecycle chaincode install ${CC_NAME}.tar.gz >&log.txt
