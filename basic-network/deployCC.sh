@@ -156,6 +156,11 @@ export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/bunjan
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/bunjang.example.com/users/Admin@bunjang.example.com/msp
 export CORE_PEER_ADDRESS=localhost:11051
 
+set -x
+peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${CC_VERSION} --package-id ${PACKAGE_ID} --sequence 1 >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
+
 ## approve the definition for daangn
 infoln "approve the definition on peer0.daangn..."
 
@@ -167,6 +172,11 @@ export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/daangn
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/daangn.example.com/users/Admin@daangn.example.com/msp
 export CORE_PEER_ADDRESS=localhost:13051
 
+set -x
+peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${CC_VERSION} --package-id ${PACKAGE_ID} --sequence 1 >&log.txt
+{ set +x; } 2>/dev/null
+cat log.txt
+
 ## approve the definition for kream
 infoln "approve the definition on peer0.kream..."
 
@@ -177,16 +187,6 @@ export CORE_PEER_LOCALMSPID="KreamMSP"
 export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/kream.example.com/peers/peer0.kream.example.com/tls/ca.crt
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/kream.example.com/users/Admin@kream.example.com/msp
 export CORE_PEER_ADDRESS=localhost:15051
-
-set -x
-peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${CC_VERSION} --package-id ${PACKAGE_ID} --sequence 1 >&log.txt
-{ set +x; } 2>/dev/null
-cat log.txt
-
-set -x
-peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${CC_VERSION} --package-id ${PACKAGE_ID} --sequence 1 >&log.txt
-{ set +x; } 2>/dev/null
-cat log.txt
 
 set -x
 peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${CC_VERSION} --package-id ${PACKAGE_ID} --sequence 1 >&log.txt
@@ -209,7 +209,6 @@ cat log.txt
 
 peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME --name ${CC_NAME} --cafile $ORDERER_CA
 
-
 ## TEST1 : Invoking the chaincode
 infoln "TEST1 : Invoking the chaincode"
 set -x
@@ -223,47 +222,31 @@ sleep 3
 
 infoln "TEST2 : Query the chaincode"
 set -x
-peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"Args":["GetAllAssets"]}' >&log.txt
+peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"Args":["GetAllTradeInfos"]}' >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt
 sleep 3
 
 ## TEST3 : Create Asset
-infoln "TEST3 : Create Asset"
+infoln "TEST3 : transfer item1"
 set -x
-peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} $PEER_CONN_PARMS -c '{"function":"CreateAsset","Args":["asset7","pink","20","DongJae","2000"]}' >&log.txt
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} $PEER_CONN_PARMS -c '{"function":"TransferTradeInfo","Args":["trade3","item1","3","15000","2023-01-01","4","2","4","testsell","testbuy"]}' >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt
 sleep 3
 
 ## TEST4 : Read Asset7
-infoln "TEST4 : Read Asset7"
+infoln "TEST4 : Read item1"
 set -x
-peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"Args":["ReadAsset","asset7"]}' >&log.txt
+peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"function":"GetInfoByItem","Args":["item1"]}' >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt
 sleep 3
 
 ## TEST5 : IsExists Asset7
-infoln "TEST5 : AssetExists Asset7"
+infoln "TEST5 : Get History of item1"
 set -x
-peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} $PEER_CONN_PARMS -c '{"function":"AssetExists","Args":["asset7"]}' >&log.txt
-{ set +x; } 2>/dev/null
-cat log.txt
-sleep 3
-
-## TEST6 : Delete Asset7
-infoln "TEST6 : Delete Asset7"
-set -x
-peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} $PEER_CONN_PARMS -c '{"function":"DeleteAsset","Args":["asset7"]}' >&log.txt
-{ set +x; } 2>/dev/null
-cat log.txt
-sleep 3
-
-## TEST7 : IsExists Asset7
-infoln "TEST7 : AssetExists Asset7"
-set -x
-peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} $PEER_CONN_PARMS -c '{"function":"AssetExists","Args":["asset7"]}' >&log.txt
+peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"function":"GetHistory","Args":["item1"]}' >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt
 sleep 3
