@@ -20,7 +20,7 @@ infoln "Fetching channel config for channel $CHANNEL_NAME"
 export PATH=${HOME}/fabric-samples/bin:$PATH
 export FABRIC_CFG_PATH=${PWD}/config
 
-CHANNEL_NAME="mychannel"
+CHANNEL_NAME="roadofart"
 
 export ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 export CORE_PEER_TLS_ENABLED=true
