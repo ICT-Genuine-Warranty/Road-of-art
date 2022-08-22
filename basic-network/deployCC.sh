@@ -21,7 +21,7 @@ export FABRIC_CFG_PATH=${PWD}/config
 
 # CHANNEL_NAME="mychannel"
 CC_NAME="basic"
-CC_SRC_PATH="./chaincode/asset-transfer-basic"
+CC_SRC_PATH="../chaincode/asset-transfer-basic"
 CC_RUNTIME_LANGUAGE="golang"
 CC_VERSION="1"
 CHANNEL_NAME="mychannel"
