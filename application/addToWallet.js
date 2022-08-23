@@ -40,7 +40,7 @@ async function main() {
                 certificate,
                 privateKey,
             },
-            mspId: "coupangMSP",
+            mspId: "CoupangMSP",
             type: "X.509",
         };
 
