@@ -13,7 +13,7 @@ const fs = require("fs");
 async function main() {
     try {
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, "ccp", "connection-org1.json");
+        const ccpPath = path.resolve(__dirname, "ccp", "connection-coupang.json");
         const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf8"));
 
         // Create a new file system based wallet for managing identities.
