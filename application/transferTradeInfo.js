@@ -56,7 +56,10 @@ async function main() {
             "15000",
             "2023-01-01",
             "4",
-            "2"
+            "2",
+            "4",
+            "testsell",
+            "testbuy"
         );
         console.log("true");
         console.log("Transaction has been submitted");
