@@ -40,22 +40,25 @@ async function main() {
         });
 
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork("mychannel");
+        const network = await gateway.getNetwork("roadofart");
 
         // Get the contract from the network.
-        const contract = network.getContract("fabcar");
+        const contract = network.getContract("basic");
 
         // Submit the specified transaction.
         // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
         // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR12', 'Dave')
-        await contract.submitTransaction(
-            "createCar",
-            "CAR12",
-            "Honda",
-            "Accord",
-            "Black",
-            "Tom"
+        const result =  await contract.submitTransaction(
+            "transferTradeInfo",
+            "trade3",
+            "item1",
+            "3",
+            "15000",
+            "2023-01-01",
+            "4",
+            "2"
         );
+        console.log("true");
         console.log("Transaction has been submitted");
 
         // Disconnect from the gateway.
