@@ -1,0 +1,21 @@
+import {Button,Modal} from 'react-bootstrap';
+
+function PopUp({showModal, setShowModal, modalData}){
+    return <Modal className='popup' centered size="sm" show={showModal} onHide={()=>{
+            setShowModal(false);
+            }}>
+            <Modal.Header closeButton className="head">
+                <Modal.Title>
+                    {modalData.title}
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className='body'>
+                {modalData.content}
+            </Modal.Body>
+            <Modal.Footer className='footer'>
+            <Button variant="secondary" onClick={()=>{setShowModal(false)}}>닫기</Button>
+            </Modal.Footer>
+        </Modal>
+}
+
+export default PopUp;

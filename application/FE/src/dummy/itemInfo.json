@@ -1,0 +1,19 @@
+{
+    "tradeCode":"trade1",
+    "itemCode":"item1",
+    "platform":3,
+    "traded":"2022-08-20",
+    "type":3,
+    "sellerId":2,
+    "buyerId":3,
+    "comments":{
+        "sellersComment":{
+            "owner":2,
+            "commentURI":"~"
+        },
+        "buyersComments":{
+            "owner":3,
+            "commentURI":"!!"
+        }
+    }
+}

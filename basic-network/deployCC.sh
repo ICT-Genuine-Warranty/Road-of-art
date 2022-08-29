@@ -230,7 +230,7 @@ sleep 3
 ## TEST3 : Create Asset
 infoln "TEST3 : transfer item1"
 set -x
-peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} $PEER_CONN_PARMS -c '{"function":"TransferTradeInfo","Args":["trade3","item1","3","15000","2023-01-01","4","2","4","testsell","testbuy"]}' >&log.txt
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} $PEER_CONN_PARMS -c '{"function":"TransferTradeInfo","Args":["3","1","3","15000","2022-05-01","3","2","3","3","4"]}' >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt
 sleep 3
@@ -238,7 +238,7 @@ sleep 3
 ## TEST4 : Read Asset7
 infoln "TEST4 : Read item1"
 set -x
-peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"function":"GetInfoByItem","Args":["item1"]}' >&log.txt
+peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"function":"GetInfoByItem","Args":["1"]}' >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt
 sleep 3
@@ -246,7 +246,7 @@ sleep 3
 ## TEST5 : IsExists Asset7
 infoln "TEST5 : Get History of item1"
 set -x
-peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"function":"GetHistory","Args":["item1"]}' >&log.txt
+peer chaincode query -C $CHANNEL_NAME -n ${CC_NAME} -c '{"function":"GetHistory","Args":["1"]}' >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt
 sleep 3

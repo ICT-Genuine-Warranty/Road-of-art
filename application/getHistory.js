@@ -50,7 +50,7 @@ async function main() {
         // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR12', 'Dave')
         const result = await contract.submitTransaction(
             "getHistory",
-            "item1"
+            "1"
         );
         console.log(result.toString());
         console.log("Transaction has been submitted");

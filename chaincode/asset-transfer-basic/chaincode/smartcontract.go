@@ -14,7 +14,7 @@ type SmartContract struct {
 
 // TradeInfo describes basic details of what makes up a simple asset
 type TradeInfo struct {
-	TradeCode string   `json:"tradeCode"`
+	TradeCode int      `json:"tradeCode"`
 	ItemCode  string   `json:"itemCode"`
 	Platform  int      `json:"platform"`
 	Price     int      `json:"price"`
@@ -31,15 +31,15 @@ type Comments struct {
 }
 
 type Comment struct {
-	OwnerId    int    `json:"owner"`
-	CommentURI string `json:""commentURI`
+	OwnerId    int `json:"owner"`
+	CommentURI int `json:""commentURI`
 }
 
 // InitLedger adds a base set of assets to the ledger
 func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) error {
 	assets := []TradeInfo{
-		{TradeCode: "trade1", ItemCode: "item1", Platform: 1, Price: 10000, Traded: "2022-08-18", Type: 1, SellerId: 1, BuyerId: 2, Comments: Comments{BuyersComment: Comment{OwnerId: 2, CommentURI: "testURIOf2"}}},
-		{TradeCode: "trade2", ItemCode: "item2", Platform: 2, Price: 12000, Traded: "2022-08-20", Type: 2, SellerId: 2, BuyerId: 3, Comments: Comments{SellersComment: Comment{OwnerId: 2, CommentURI: "testURIOf2"}, BuyersComment: Comment{OwnerId: 3, CommentURI: "testURIOf3"}}},
+		{TradeCode: 1, ItemCode: "1", Platform: 1, Price: 10000, Traded: "2020-08-18", Type: 2, SellerId: 1, BuyerId: 2, Comments: Comments{SellersComment: Comment{OwnerId: 1, CommentURI: 1}, BuyersComment: Comment{OwnerId: 2, CommentURI: 1}}},
+		{TradeCode: 2, ItemCode: "2", Platform: 2, Price: 12000, Traded: "2022-08-20", Type: 2, SellerId: 2, BuyerId: 3, Comments: Comments{SellersComment: Comment{OwnerId: 2, CommentURI: 2}, BuyersComment: Comment{OwnerId: 3, CommentURI: 2}}},
 	}
 
 	for _, asset := range assets {
@@ -58,13 +58,13 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 }
 
 // CreateTradeInfo issues a new asset to the world state with given details.
-func (s *SmartContract) CreateTradeInfo(ctx contractapi.TransactionContextInterface, tradeCode string, itemCode string, platform int, price int, traded string, _type int, sellerId int, buyerId int, sellerCommentURI string, buyerCommentURI string) error {
-	exists, err := s.TradeInfoExists(ctx, tradeCode)
+func (s *SmartContract) CreateTradeInfo(ctx contractapi.TransactionContextInterface, tradeCode int, itemCode string, platform int, price int, traded string, _type int, sellerId int, buyerId int, sellerCommentURI int, buyerCommentURI int) error {
+	exists, err := s.TradeInfoExists(ctx, itemCode)
 	if err != nil {
 		return err
 	}
 	if exists {
-		return fmt.Errorf("the asset %s already exists", tradeCode)
+		return fmt.Errorf("the asset %s already exists", itemCode)
 	}
 
 	asset := TradeInfo{
@@ -111,8 +111,8 @@ func (s *SmartContract) GetInfoByItem(ctx contractapi.TransactionContextInterfac
 }
 
 // UpdateTradeInfo updates an existing asset in the world state with provided parameters.
-func (s *SmartContract) ModifyTradeInfo(ctx contractapi.TransactionContextInterface, tradeCode string, itemCode string, platform int, price int, traded string, _type int, sellerId int, buyerId int, sellerCommentURI string, buyerCommentURI string) error {
-	exists, err := s.TradeInfoExists(ctx, tradeCode)
+func (s *SmartContract) ModifyTradeInfo(ctx contractapi.TransactionContextInterface, tradeCode int, itemCode string, platform int, price int, traded string, _type int, sellerId int, buyerId int, sellerCommentURI int, buyerCommentURI int) error {
+	exists, err := s.TradeInfoExists(ctx, itemCode)
 	if err != nil {
 		return err
 	}
@@ -169,7 +169,7 @@ func (s *SmartContract) TradeInfoExists(ctx contractapi.TransactionContextInterf
 }
 
 // TransferTradeInfo updates the owner field of asset with given id in world state.
-func (s *SmartContract) TransferTradeInfo(ctx contractapi.TransactionContextInterface, tradeCode string, itemCode string, platform int, price int, traded string, _type int, sellerId int, buyerId int, sellerCommentURI string, buyerCommentURI string) error {
+func (s *SmartContract) TransferTradeInfo(ctx contractapi.TransactionContextInterface, tradeCode int, itemCode string, platform int, price int, traded string, _type int, sellerId int, buyerId int, sellerCommentURI int, buyerCommentURI int) error {
 	asset, err := s.GetInfoByItem(ctx, itemCode)
 	if err != nil {
 		return err
